@@ -1,0 +1,31 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.5.1",
+    "fs-extra": "^10.0.0",
+    "ganache-cli": "^6.12.2",
+    "mocha": "^9.1.2",
+    "next": "12.1.2",
+    "next-routes": "^1.4.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "solc": "^0.4.17",
+    "web3": "^1.6.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.4",
+    "eslint": "8.12.0",
+    "eslint-config-next": "12.1.2",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.23"
+  }
+}
