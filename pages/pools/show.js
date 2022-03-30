@@ -5,7 +5,7 @@ class PoolDetails extends Component {
   render() {
     return (
       <Layout>
-        <div className="w-screen  h-screen">
+        <div className="w-screen  h-screen p-4">
           <h1>ijiojiojio oijoij</h1>
         </div>
       </Layout>
