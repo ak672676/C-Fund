@@ -1,0 +1,15 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "./unreset.scss";
+/* @layer base {
+  ul,
+  ol {
+    list-style: revert;
+  }
+}
+
+.remove-default-tailwind {
+  @apply list-none back
+} */

@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import factory from "../../ethereum/factory";
 import web3 from "../../ethereum/web3";
 import { Router } from "../../routes";
+import { Editor, EditorState } from "draft-js";
 
 class PoolNew extends react.Component {
   state = {
@@ -40,8 +41,8 @@ class PoolNew extends react.Component {
   render() {
     return (
       <Layout>
-        <div className="w-screen  h-screen flex justify-center items-center">
-          <div className=" bg-slate-400 w-1/2 m-h-2/3  mt-[-100px] shadow-lg rounded-md p-8">
+        <div className="w-full  h-screen flex justify-center items-center">
+          <div className=" bg-white w-1/2 m-h-2/3  mt-[-100px] shadow-lg rounded-md p-8">
             <form onSubmit={this.onSubmit}>
               <div className="mb-2">
                 <label

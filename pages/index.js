@@ -7,11 +7,10 @@ import landingImage from "../assets/landing.jpg";
 import React, { Component } from "react";
 import { Link } from "../routes";
 class Home extends Component {
-
   render() {
     return (
       <Layout>
-        <div className="w-screen  h-screen">
+        <div className="w-full  h-screen">
           <div className="h-full w-full relative">
             {/* <div className="h-full w-full absolute top-0 left-0 bg-pink-900">
               <Image
@@ -38,6 +37,7 @@ class Home extends Component {
                         </button>
                       </a>
                     </Link>
+                    
                   </div>
                 </div>
               </div>
