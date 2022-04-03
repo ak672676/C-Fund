@@ -22,9 +22,11 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <a href="#" className="px-4 font-bold hover:text-gray-600">
-                About
-              </a>
+              <Link route="/about">
+                <a  className="px-4 font-bold hover:text-gray-600">
+                  About
+                </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="px-4 font-bold hover:text-gray-600">

@@ -4,12 +4,17 @@ import Layout from "../../components/Layout";
 import { Link } from "../../routes";
 import Pool from "../../ethereum/pool";
 import web3 from "../../ethereum/web3";
+import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html";
+import { Router } from "../../routes";
 
 class PoolDetails extends Component {
   state = {
     value: "",
     errorMessage: "",
     loading: false,
+    message: "No description",
+    editorState: EditorState.createEmpty(),
   };
 
   static async getInitialProps(props) {
@@ -31,6 +36,21 @@ class PoolDetails extends Component {
     this.setState({
       value: web3.utils.fromWei(this.props.minimumContribution, "ether"),
     });
+    console.log(this.props.description);
+    this.setState(
+      {
+        editorState: EditorState.createWithContent(
+          convertFromRaw(JSON.parse(this.props.description))
+        ),
+      },
+      () => {
+        this.setState({
+          message: draftToHtml(
+            convertToRaw(this.state.editorState.getCurrentContent())
+          ),
+        });
+      }
+    );
   }
   onSubmit = async (event) => {
     event.preventDefault();
@@ -70,7 +90,12 @@ class PoolDetails extends Component {
               </h1>
             </div>
           </div>
-          <div className="p-4 bg-white  min-h-[500px] mt-12 mx-4 shadow-2xl rounded-2xl"></div>
+          <div className="p-4 bg-white  min-h-[500px] mt-12 mx-4 shadow-2xl rounded-2xl">
+            <div
+              className="unreset"
+              dangerouslySetInnerHTML={{ __html: this.state.message }}
+            ></div>
+          </div>
           <div className="p-4 w-full mt-8 flex flex-wrap items-center justify-center">
             <div className="h-[200px]  bg-white p-4 w-1/4 m-2 mb-4 shadow-2xl rounded-2xl hover:scale-[102%] hover:shadow-indigo-300">
               <h2
@@ -110,31 +135,35 @@ class PoolDetails extends Component {
                 contributor
               </p>
             </div>
-            <div className="h-[200px]  bg-white p-4 w-1/4 m-2 mb-4 shadow-2xl rounded-2xl hover:scale-[102%] hover:shadow-indigo-300">
-              <h2
-                style={{ overflowWrap: "break-word" }}
-                className="font-semibold"
-              >
-                {this.props.approversCount}
-              </h2>
-              <p className="text-slate-500">Total Contributors</p>
-              <p className="text-slate-800 mt-2">
-                Number of people who have already contributed to this pool
-              </p>
-            </div>
-            <div className="h-[200px] cursor-pointer  bg-white p-4 w-1/4 m-2 mb-4 shadow-2xl rounded-2xl hover:scale-[102%] hover:shadow-indigo-300">
-              <h2
-                style={{ overflowWrap: "break-word" }}
-                className="font-semibold"
-              >
-                {this.props.requests}
-              </h2>
-              <p className="text-slate-500">Number of Requests</p>
-              <p className="text-slate-800 mt-2">
-                A request tries to withdraw money from the pool. Requests must
-                be approved by contributors
-              </p>
-            </div>
+            <Link route={`/pools/${this.props.address}/requests/test`}>
+              <div className="h-[200px]  bg-white p-4 w-1/4 m-2 mb-4 shadow-2xl rounded-2xl hover:scale-[102%] hover:shadow-indigo-300">
+                <h2
+                  style={{ overflowWrap: "break-word" }}
+                  className="font-semibold"
+                >
+                  {this.props.approversCount}
+                </h2>
+                <p className="text-slate-500">Total Contributors</p>
+                <p className="text-slate-800 mt-2">
+                  Number of people who have already contributed to this pool
+                </p>
+              </div>
+            </Link>
+            <Link route={`/pools/${this.props.address}/requests`}>
+              <div className="h-[200px] cursor-pointer  bg-white p-4 w-1/4 m-2 mb-4 shadow-2xl rounded-2xl hover:scale-[102%] hover:shadow-indigo-300">
+                <h2
+                  style={{ overflowWrap: "break-word" }}
+                  className="font-semibold"
+                >
+                  {this.props.requests}
+                </h2>
+                <p className="text-slate-500">Number of Requests</p>
+                <p className="text-slate-800 mt-2">
+                  A request tries to withdraw money from the pool. Requests must
+                  be approved by contributors
+                </p>
+              </div>
+            </Link>
           </div>
 
           <div className="py-4">
@@ -182,38 +211,6 @@ class PoolDetails extends Component {
               {web3.utils.fromWei(this.props.minimumContribution, "ether")}{" "}
               Ether
             </p>
-          </div>
-          <div className="p-4 w-full mt-4">
-            <h1 className="text-center mb-4 text-5xl">Requests</h1>
-            <div className="flex justify-end">
-              <Link route={`/pools/${this.props.address}/requests/new`}>
-                <a>
-                  <button className="transform hover:scale-110 transition duration-300 ease-in-out bg-indigo-400 text-white font-bold rounded-full py-4 px-6 shadow-lg uppercase tracking-wider">
-                    Request
-                  </button>
-                </a>
-              </Link>
-            </div>
-            <div className="w-full flex flex-wrap items-center justify-center">
-              <Link route={`/pools/646546545jhjk/requests`}>
-                <div className="h-[100px] w-[300px] p-4 m-2 cursor-pointer hover:scale-[102%] rounded-2xl hover:shadow-indigo-300 shadow-2xl bg-white">
-                  <h1>Request</h1>
-                </div>
-              </Link>
-
-              <div className="h-[100px] w-[300px] p-4 m-2 cursor-pointer hover:scale-[102%] rounded-2xl hover:shadow-indigo-300 shadow-2xl bg-white">
-                <h1>Request</h1>
-              </div>
-              <div className="h-[100px] w-[300px] p-4 m-2 cursor-pointer hover:scale-[102%] rounded-2xl hover:shadow-indigo-300 shadow-2xl bg-white">
-                <h1>Request</h1>
-              </div>
-              <div className="h-[100px] w-[300px] p-4 m-2 cursor-pointer hover:scale-[102%] rounded-2xl hover:shadow-indigo-300 shadow-2xl bg-white">
-                <h1>Request</h1>
-              </div>
-              <div className="h-[100px] w-[300px] p-4 m-2 cursor-pointer hover:scale-[102%] rounded-2xl hover:shadow-indigo-300 shadow-2xl bg-white">
-                <h1>Request</h1>
-              </div>
-            </div>
           </div>
         </div>
       </Layout>

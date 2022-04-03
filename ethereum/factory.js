@@ -3,7 +3,7 @@ import PoolFactory from './build/PoolFactory.json';
 
 const instance = new web3.eth.Contract(
   JSON.parse(PoolFactory.interface),
-  '0x83E14CE1cDC0bF07695c4a3e231c665F1c8c95f3'
+  '0xD001F6d5B2aB9C9b4b0Fa2d129120dF2407D313C'
 );
 
 export default instance;
