@@ -25,7 +25,7 @@ class Home extends Component {
                 <div className="py-20 hero">
                   <div className="container mx-auto px-6">
                     <div className="text-4xl font-bold mb-2 text-indigo-600">
-                      Need Funds to Pay For a Medical Emergency or Social Cause?
+                      Need Funds for your startup?
                     </div>
                     <div className="text-2xl mb-8 text-indigo-400">
                       C-Fund helps you collect fund in from of crypto-currency
