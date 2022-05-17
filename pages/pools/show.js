@@ -36,7 +36,6 @@ class PoolDetails extends Component {
     this.setState({
       value: web3.utils.fromWei(this.props.minimumContribution, "ether"),
     });
-    console.log(this.props.description);
     this.setState(
       {
         editorState: EditorState.createWithContent(
@@ -69,7 +68,6 @@ class PoolDetails extends Component {
       this.setState({ errorMessage: err.message });
     }
     this.setState({ loading: false, value: "" });
-    console.log(this.state);
   };
 
   render() {

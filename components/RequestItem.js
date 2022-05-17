@@ -24,7 +24,8 @@ class RequestItem extends Component {
   render() {
     const { id, request, approversCount } = this.props;
     const readyToFinalize = request.approvalCount > approversCount / 2;
-
+    console.log("----------");
+    console.log(request);
     return (
       <tr>
         <td className="border border-slate-300">{id}</td>
@@ -36,17 +37,17 @@ class RequestItem extends Component {
         <td className="border border-slate-300">
           {request.approvalCount}/{approversCount}
         </td>
-        <td className="border border-slate-300">
+        <td className="border border-slate-300 text-center">
           {request.complete ? null : (
-            <button className="" onClick={this.onApprove}>
+            <button className="bg-green-500 text-white rounded-md p-2" onClick={this.onApprove}>
               Approve
             </button>
           )}
         </td>
-        <td className="border border-slate-300">
+        <td className="border border-slate-300 text-center">
           {" "}
           {request.complete ? null : (
-            <button className="" onClick={this.onFinalize}>
+            <button className="bg-red-500 text-white rounded-md p-2" onClick={this.onFinalize}>
               FInalize
             </button>
           )}
